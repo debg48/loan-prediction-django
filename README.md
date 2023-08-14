@@ -3,7 +3,7 @@
 ## Requirements :
 To run this app locally 
 
-``` git clone  <> ```
+``` git clone  https://github.com/debg48/loan-prediction-django.git ```
 
 Install the packages in requirements.txt file
 
