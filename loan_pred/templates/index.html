@@ -4,5 +4,41 @@
 </head>
 <body>
     <h3>Welcome to Loan Prediction App !</h3>
+    <form action="http://127.0.0.1:8000/predict/" method="post">
+        <label for="no_of_dependents">Number of Dependents of the Applicant: </label>
+        <input type="number" name="no_of_dependents"  required>
+        <br>
+        <label for="education">Education of the Applicant(1 for Graduate and 0 for Non Graduate) : </label>
+        <input type="number" name="education"  required>
+        <br>
+        <label for="self_employed">Employment Status of the Applicant (1 for self employed and 0 otherwise): </label>
+        <input type="number" name="self_employed"  required>
+        <br>
+        <label for="income_annum">Annual Income of the Applicant: </label>
+        <input type="number" name="income_annum"  required>
+        <br>
+        <label for="loan_amount">Loan Amount: </label>
+        <input type="number" name="loan_amount"  required>
+        <br>
+        <label for="loan_term">Loan Term in Years: </label>
+        <input type="number" name="loan_term"  required>
+        <br>
+        <label for="cibil_score">Cibil Score: </label>
+        <input type="number" name="cibil_score"  required>
+        <br>
+        <label for="residential_assets_value">Residential Assets Value: </label>
+        <input type="number" name="residential_assets_value"  required>
+        <br>
+        <label for="commercial_assets_value">Commercial Assets Value: </label>
+        <input type="number" name="commercial_assets_value"  required>
+        <br>
+        <label for="luxury_assets_value">Luxury Assets Value: </label>
+        <input type="number" name="luxury_assets_value"  required>
+        <br>
+        <label for="bank_asset_value">Bank Asset Value: </label>
+        <input type="number" name="bank_asset_value"  required>
+        <br>
+        <input type="submit" value="submit">
+    </form>
 </body>
 </html>
