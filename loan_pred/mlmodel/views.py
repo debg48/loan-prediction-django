@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+import pickle
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
 
 
 def home(request):
@@ -13,10 +16,10 @@ def predict(request):
         try:
             try:
                 data = json.loads(request.body)
-                print(data)
+                result = pred(data)
                 return JsonResponse({ 
                 "sucess":True,
-                "data": str(data) })
+                "data": str(result) })
             except: 
                 try : 
                     data={'no_of_dependents' : request.POST.get('no_of_dependents'),
@@ -30,10 +33,15 @@ def predict(request):
                     'commercial_assets_value' : request.POST.get('commercial_assets_value'),
                     'luxury_assets_value' : request.POST.get('luxury_assets_value'),
                     'bank_asset_value' : request.POST.get('bank_asset_value')}
-                    print(data)
-                    return JsonResponse({ 
-                    "sucess":True,
-                    "data": str(data) })
+                    result = pred(data)
+                    if result == 0 :
+                        return render(request,'approved.html')
+                    elif result == 1:
+                        return render(request,'rejected.html')
+                    else :
+                        return JsonResponse({ 
+                        "sucess": False,
+                        "data": str(result) })
                 except Exception as e :
                     return JsonResponse({ 
                     "sucess":False,
@@ -44,3 +52,14 @@ def predict(request):
             "sucess":False,
             "data": str(e) })
 
+file_name = "C:/Users/debga/OneDrive/Desktop/Code/django/demo-proj/loan_pred/mlmodel/rf.pkl"
+
+def pred(data):
+    #print(data)
+    df = pd.DataFrame.from_dict(data,orient="index")
+    # print(df)
+    df=df.T
+    with open(file_name, 'rb') as f:
+        rf_model_loaded = pickle.load(f)
+        result = rf_model_loaded.predict(df) 
+    return result[0]
