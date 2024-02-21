@@ -9,7 +9,7 @@ Install the packages in requirements.txt file
 
 ### API Hitpoint :
 
-* Diabetes
+* Loan Prediction
 
 ```localhost:8000/predict/```
 
